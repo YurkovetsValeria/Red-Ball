@@ -12,6 +12,7 @@ namespace GameDevLabirinth
         private bool _isEnabledEdit;
         private GameLevel _gameLevel;
         private SceneEditor _sceneEditor;
+        public bool IsEnabledEdit => _isEnabledEdit;
 
         [MenuItem("Window/Level Editor")]
         public static void Init()

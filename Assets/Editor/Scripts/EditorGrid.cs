@@ -11,7 +11,7 @@ namespace GameDevLabirinth
         private const float _offsetDown = 0.5f;
         private const float _offsetRight = 1f;
 
-        public Vector3 CheckPotision(Vector3 position)
+        public Vector3 CheckPosition(Vector3 position)
         {
             float tempX = 0;
             float tempY = 0;
@@ -21,38 +21,16 @@ namespace GameDevLabirinth
             if (position.x > x && position.x < (x + _offsetRight * _columnCount) &&
                 position.y < y && position.y > (y - _offsetDown * _lineCount))
             {
-                for (int i = 0; i < _columnCount; i++)
-                {
-                    if (position.x > x && position.x < (x + _offsetRight))
-                    {
-                        tempX = x + _offsetRight / 2;
-                        break;
-                    }
-                    else
-                    {
-                        x += _offsetRight;
-                    }
-                }
+                tempX = Mathf.Round((position.x - _leftPosition) / _offsetRight) * _offsetRight + _leftPosition;
+                tempY = Mathf.Round((y - position.y) / _offsetDown) * _offsetDown + (y - _offsetDown * _lineCount);
 
-                for (int i = 0; i < _lineCount; i++)
-                {
-                    if (position.y < y && position.y > (y - _offsetDown))
-                    {
-                        tempY = y - _offsetDown / 2;
-                        break;
-                    }
-                    else
-                    {
-                        y -= _offsetDown;
-                    }
-                }
+                return new Vector3(tempX, tempY);
             }
             else
             {
                 Debug.LogWarning("out of play zone");
+                return Vector3.zero; // ”казываем, что позици€ недопустима€
             }
-
-            return new Vector3(tempX, tempY);
         }
     }
 }

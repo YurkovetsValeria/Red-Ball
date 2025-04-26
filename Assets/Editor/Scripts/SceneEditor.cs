@@ -20,31 +20,20 @@ namespace GameDevLabirinth
         public void OnSceneGUI(SceneView sceneView)
         {
             Event current = Event.current;
-            if (current.type == EventType.MouseDown)
+
+            if (_levelEditor.IsEnabledEdit) 
             {
-                Vector3 point = sceneView.camera.ScreenToWorldPoint(new Vector3(current.mousePosition.x,
-                    sceneView.camera.pixelHeight - current.mousePosition.y,
-                    sceneView.camera.nearClipPlane));
-                Vector3 position = ValidatePosition(point); // Заменено CheckPosition
-
-                if (position != Vector3.zero)
+                if (current.type == EventType.MouseDown && current.button == 0) 
                 {
-                    if (IsEmpty(position))
-                    {
-                        GameObject game = PrefabUtility.InstantiatePrefab(_levelEditor.GetBlock(), _parent) as GameObject; // Исправлено Prefub
-                        game.transform.position = position;
+                    Vector3 point = sceneView.camera.ScreenToWorldPoint(new Vector3(current.mousePosition.x,
+                        sceneView.camera.pixelHeight - current.mousePosition.y,
+                        sceneView.camera.nearClipPlane));
+                    point.z = 0; 
 
-                        if (game.TryGetComponent(out OtherBlock other))
-                        {
-                            other.BlockData = _levelEditor.GetBlock();
-                        }
+                    Vector3 gridPosition = GetGridPosition(point);
 
-                        if (game.TryGetComponent(out Block block))
-                        {
-                            block.BlockData = _levelEditor.GetBlock();
-                            block.SetData(_levelEditor.GetBlock() as ColoredBlock);
-                        }
-                    }
+                    CreateBlock(gridPosition);
+                    current.Use(); 
                 }
             }
 
@@ -54,16 +43,32 @@ namespace GameDevLabirinth
             }
         }
 
-        private bool IsEmpty(Vector3 position)
+        private Vector3 GetGridPosition(Vector3 position)
         {
-            Collider2D collider = Physics2D.OverlapCircle(position, 0.01f);
-            return collider == null;
+            float gridSize = 1f; 
+
+            float x = Mathf.Round(position.x / gridSize) * gridSize;
+            float y = Mathf.Round(position.y / gridSize) * gridSize;
+
+            return new Vector3(x, y, 0); 
         }
 
-        private Vector3 ValidatePosition(Vector3 point)
+        private void CreateBlock(Vector3 position)
         {
-            // Временно возвращаем point, можно заменить на реальную проверку
-            return point;
+            var blockToCreate = _levelEditor.GetBlock().Prefub;
+            GameObject game = PrefabUtility.InstantiatePrefab(blockToCreate, _parent) as GameObject;
+            game.transform.position = position;
+
+            if (game.TryGetComponent(out OtherBlock other))
+            {
+                other.BlockData = _levelEditor.GetBlock();
+            }
+
+            if (game.TryGetComponent(out Block block))
+            {
+                block.BlockData = _levelEditor.GetBlock();
+                block.SetData(_levelEditor.GetBlock() as ColoredBlock);
+            }
         }
     }
 }
