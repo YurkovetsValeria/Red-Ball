@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace GameDevLabirinth
@@ -7,6 +7,8 @@ namespace GameDevLabirinth
     public class GameLevel : ScriptableObject
     {
         public List<BlockObject> Blocks = new List<BlockObject>();
+        public List<BonusAttach> Bonuses = new List<BonusAttach>();
+        public Sprite Background;
     }
 
     [System.Serializable]

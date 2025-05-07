@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e137ed604ead0474ebeb44b0980c0ba0, type: 3}
+  m_Script: {fileID: 11500000, guid: e767299c7b4565a418b6ed99f1aff22f, type: 3}
   m_Name: Immortal
   m_EditorClassIdentifier: 
-  Prefub: {fileID: 7215667483141971156, guid: 5bfcb112e1a91b34bb218b5f4fcce707, type: 3}
+  Prefab: {fileID: 8117966445616462613, guid: fd356c62060c3c24a84e238c118dc77b, type: 3}

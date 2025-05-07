@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c0f248687819ac4ab7f14e1afe09e84, type: 3}
+  m_Script: {fileID: 11500000, guid: e0a3d69c2e258a140a4446836e8be481, type: 3}
   m_Name: Green
   m_EditorClassIdentifier: 
-  Prefub: {fileID: 1384386836467228511, guid: 5f663c6e35d0b2b4aafe04f71034246a, type: 3}
+  Prefab: {fileID: 951973071478035009, guid: 7b85303c87264db48b5905b33ef28ddd, type: 3}
   Sprites:
   - {fileID: -8480322663989752812, guid: d8fc44ecb3f398649bacdad35006cc89, type: 3}
   - {fileID: 2689354929541425477, guid: d8fc44ecb3f398649bacdad35006cc89, type: 3}
   - {fileID: 6164509865321047114, guid: d8fc44ecb3f398649bacdad35006cc89, type: 3}
-  BaseColor: {r: 0.17638248, g: 0.7849056, b: 0.121438265, a: 0}
+  BaseColor: {r: 0.26666668, g: 0.7411765, b: 0.19607843, a: 1}
   Score: 150

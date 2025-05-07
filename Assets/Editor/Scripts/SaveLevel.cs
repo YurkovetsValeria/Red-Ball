@@ -1,35 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace GameDevLabirinth
 {
     public class SaveLevel
     {
-        public List<BlockObject> GetBlocks()
+        public void Save(GameLevel gameLevel)
         {
-            List<BlockObject> objects = new List<BlockObject>();
-            GameObject[] allBlocks = GameObject.FindGameObjectsWithTag("Block");
+            gameLevel.Blocks = new List<BlockObject>();
+            BaseBlock[] baseBlocks = GameObject.FindObjectsOfType<BaseBlock>();
 
-            foreach (var item in allBlocks)
+            foreach (var item in baseBlocks)
             {
-                BlockObject blockObject = new BlockObject();
-                blockObject.Position = item.gameObject.transform.position;
-
-                if (item.TryGetComponent(out Block block))
+                BlockObject blockObject = new BlockObject
                 {
-                    blockObject.Block = block.BlockData;
-                }
+                    Position = item.gameObject.transform.position,
 
-                if (item.TryGetComponent(out OtherBlock otherBlock))
-                {
-                    blockObject.Block = otherBlock.BlockData;
-                }
+                    Block = item.BlockData
+                };
 
-                objects.Add(blockObject);
+                gameLevel.Blocks.Add(blockObject);
             }
-
-            return objects;
         }
     }
 }

@@ -9,7 +9,8 @@ Preset:
   m_Name: ColoredBlock
   m_TargetType:
     m_NativeTypeID: 114
-    m_ManagedTypePPtr: {fileID: 11500000, guid: 9c0f248687819ac4ab7f14e1afe09e84, type: 3}
+    m_ManagedTypePPtr: {fileID: 11500000, guid: e0a3d69c2e258a140a4446836e8be481,
+      type: 3}
     m_ManagedTypeFallback: 
   m_Properties:
   - target: {fileID: 0}
@@ -27,46 +28,44 @@ Preset:
   - target: {fileID: 0}
     propertyPath: Prefub
     value: 
-    objectReference: {fileID: 1384386836467228511, guid: 5f663c6e35d0b2b4aafe04f71034246a, type: 3}
+    objectReference: {fileID: 951973071478035009, guid: 7b85303c87264db48b5905b33ef28ddd,
+      type: 3}
   - target: {fileID: 0}
     propertyPath: Sprites.Array.size
     value: 3
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: 'Sprites.Array.data[0]'
+    propertyPath: Sprites.Array.data[0]
     value: 
-    objectReference: {fileID: -8480322663989752812, guid: d8fc44ecb3f398649bacdad35006cc89, type: 3}
+    objectReference: {fileID: -8480322663989752812, guid: d8fc44ecb3f398649bacdad35006cc89,
+      type: 3}
   - target: {fileID: 0}
-    propertyPath: 'Sprites.Array.data[1]'
+    propertyPath: Sprites.Array.data[1]
     value: 
-    objectReference: {fileID: 2689354929541425477, guid: d8fc44ecb3f398649bacdad35006cc89, type: 3}
+    objectReference: {fileID: 2689354929541425477, guid: d8fc44ecb3f398649bacdad35006cc89,
+      type: 3}
   - target: {fileID: 0}
-    propertyPath: 'Sprites.Array.data[2]'
+    propertyPath: Sprites.Array.data[2]
     value: 
-    objectReference: {fileID: 6164509865321047114, guid: d8fc44ecb3f398649bacdad35006cc89, type: 3}
+    objectReference: {fileID: 6164509865321047114, guid: d8fc44ecb3f398649bacdad35006cc89,
+      type: 3}
   - target: {fileID: 0}
     propertyPath: BaseColor.r
-    value: 0.17638248
+    value: 0.26666668
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: BaseColor.g
-    value: 0.7849056
+    value: 0.7411765
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: BaseColor.b
-    value: 0.121438265
+    value: 0.19607843
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: BaseColor.a
-    value: 0
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: Score
     value: 150
     objectReference: {fileID: 0}
-  m_ExcludedProperties: []
-  m_CoupledType:
-    m_NativeTypeID: 0
-    m_ManagedTypePPtr: {fileID: 0}
-    m_ManagedTypeFallback: 
-  m_CoupledProperties: []

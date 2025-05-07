@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Block
+  - BulletsPool
+  - UfosPool
   layers:
   - Default
   - TransparentFX
@@ -14,11 +16,11 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ball
+  - Block
+  - Bullet
+  - Wall
+  - Ufo
   - 
   - 
   - 
@@ -40,11 +42,11 @@ TagManager:
   - 
   m_SortingLayers:
   - name: Background
-    uniqueID: 3440093821
+    uniqueID: 1271926285
     locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
   - name: Effects
-    uniqueID: 3996014803
+    uniqueID: 134875063
     locked: 0
