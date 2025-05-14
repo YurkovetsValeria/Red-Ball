@@ -11,51 +11,68 @@ namespace GameDevLabirinth
 
         public void SetLevelEditor(LevelEditor levelEditor, Transform parent)
         {
-            _parent = parent;
             _levelEditor = levelEditor;
+            _parent = parent;
         }
 
         public void OnSceneGUI(SceneView sceneView)
         {
+            _grid.DrawGrid();
+
             Event current = Event.current;
-            if (current.type == EventType.MouseDown)
+            if (current.type == EventType.MouseDown && current.button == 0)
             {
-                Vector3 point = sceneView.camera.ScreenToWorldPoint(new Vector3(current.mousePosition.x,
-                    sceneView.camera.pixelHeight - current.mousePosition.y,
-                    sceneView.camera.nearClipPlane));
+                Ray ray = HandleUtility.GUIPointToWorldRay(current.mousePosition);
+                Vector3 mouseWorldPos = ray.origin;
+                mouseWorldPos.z = 0;
 
-                Debug.Log(point.ToString("F2"));
-
-                Vector3 position = _grid.CheckPotision(point);
-                if (position != Vector3.zero)
+                Vector3 gridPosition = _grid.CheckPosition(mouseWorldPos);
+                if (gridPosition != Vector3.zero && IsEmpty(gridPosition))
                 {
-                    if (IsEmpty(position))
-                    {
-                        GameObject game = PrefabUtility.InstantiatePrefab(_levelEditor.GetBlock().Prefab, _parent) as GameObject;
-                        game.transform.position = position;
-
-                        if (game.TryGetComponent(out BaseBlock baseBlock))
-                        {
-                            baseBlock.BlockData = _levelEditor.GetBlock();
-                        }
-
-                        if (game.TryGetComponent(out Block block))
-                        {
-                            block.SetData(_levelEditor.GetBlock() as ColoredBlock);
-                        }
-                    }
+                    CreateBlock(gridPosition);
+                    current.Use();
                 }
-            }
-            if (current.type == EventType.Layout)
-            {
-                HandleUtility.AddDefaultControl(GUIUtility.GetControlID(GetHashCode(), FocusType.Passive));
             }
         }
 
         private bool IsEmpty(Vector3 position)
         {
-            Collider2D collider = Physics2D.OverlapCircle(position, 0.01f);
-            return collider == null;
+            Collider2D collider = Physics2D.OverlapCircle(position, 0.1f);
+            return collider == null || collider.transform == _parent;
+        }
+
+        private void CreateBlock(Vector3 position)
+        {
+            BlockData blockData = _levelEditor.GetBlock();
+            if (blockData == null || blockData.Prefab == null)
+            {
+                Debug.LogError("Invalid block data or prefab!");
+                return;
+            }
+
+            GameObject block = PrefabUtility.InstantiatePrefab(blockData.Prefab, _parent) as GameObject;
+            if (block == null)
+            {
+                Debug.LogError("Failed to instantiate block!");
+                return;
+            }
+
+            block.transform.position = position;
+            block.name = "block"; // Изменено здесь - теперь всегда "Block"
+
+            if (block.TryGetComponent(out BaseBlock baseBlock))
+            {
+                baseBlock.BlockData = blockData;
+
+                if (blockData is ColoredBlock coloredBlockData &&
+                    block.TryGetComponent(out SpriteRenderer renderer))
+                {
+                    renderer.color = coloredBlockData.BaseColor;
+                }
+            }
+
+            Undo.RegisterCreatedObjectUndo(block, "Create Block");
+            EditorUtility.SetDirty(block);
         }
     }
 }

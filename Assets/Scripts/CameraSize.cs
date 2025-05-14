@@ -4,46 +4,60 @@ namespace GameDevLabirinth.Tools
 {
     public class CameraSize : MonoBehaviour
     {
-        private const float SizeX = 1920.0f;
-        private const float SizeY = 1080.0f;
-        private float _targetSizeX = 0f;
-        private float _targetSizeY = 0f;
-        private const float HalfSize = 200.0f; // половина высоты в пикселях
-        [SerializeField] private bool _isHorizontal = true;
+        [SerializeField] private float _targetOrthographicSize = 9.6f; // Фиксированный размер камеры
+        [SerializeField] private bool _isVertical = true; // Для вертикальной ориентации
 
-        private void Awake()
+        private const float ReferenceWidth = 1080f;  // Ширина (для вертикального режима)
+        private const float ReferenceHeight = 1920f; // Высота (для вертикального режима)
+
+        private void Start()
         {
-            _targetSizeX = _isHorizontal ? SizeX : SizeY;
-            _targetSizeY = _isHorizontal ? SizeY : SizeX;
-
-            CameraResize();
+            UpdateCamera();
         }
-        private void CameraResize()
-        {
-            float screenRatio = (float)Screen.width / (float)Screen.height;
-            float targetRatio = _targetSizeX / _targetSizeY;
 
-            if (screenRatio >= targetRatio)
+        private void UpdateCamera()
+        {
+            if (Camera.main == null) return;
+
+            float currentAspect = (float)Screen.width / Screen.height;
+            float referenceAspect = ReferenceWidth / ReferenceHeight;
+
+            if (_isVertical)
             {
-                Resize();
+                // Вертикальная ориентация (высота важнее)
+                if (currentAspect < referenceAspect)
+                {
+                    // Если экран уже, чем 9:16 (например, 9:18), увеличиваем orthographicSize
+                    Camera.main.orthographicSize = _targetOrthographicSize * (referenceAspect / currentAspect);
+                }
+                else
+                {
+                    // Если шире или такое же — оставляем базовый размер
+                    Camera.main.orthographicSize = _targetOrthographicSize;
+                }
             }
             else
             {
-                float differentSize = targetRatio / screenRatio;
-                Resize(differentSize);
+                // Горизонтальная ориентация (ширина важнее)
+                if (currentAspect > referenceAspect)
+                {
+                    Camera.main.orthographicSize = _targetOrthographicSize * (currentAspect / referenceAspect);
+                }
+                else
+                {
+                    Camera.main.orthographicSize = _targetOrthographicSize;
+                }
             }
+
+            Camera.main.transform.position = new Vector3(0, 0, -10);
         }
 
-        private void Resize(float differentSize = 1.0f)
-        {
-            Camera.main.orthographicSize = _targetSizeY / HalfSize * differentSize;
-        }
 #if UNITY_EDITOR
-        [ContextMenu("Resize")]
-        private void ResizeOnEditor()
+        [ContextMenu("Force Update Camera")]
+        private void ForceUpdate()
         {
-            float higth = _isHorizontal ? SizeY : SizeX;
-            Camera.main.orthographicSize = higth / HalfSize;
+            UpdateCamera();
+            Debug.Log($"Camera size: {Camera.main.orthographicSize}");
         }
 #endif
     }

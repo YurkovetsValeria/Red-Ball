@@ -25,3 +25,21 @@ MonoBehaviour:
     BlockData: {fileID: 11400000, guid: ad55b1f60c61f8f4a9d6913a97d7982e, type: 2}
   - Texture2D: {fileID: 2800000, guid: e92feb063fa96124193d499656b2a16e, type: 3}
     BlockData: {fileID: 11400000, guid: c5d2d4df0d64b8840a1fcf2cbdc74b1b, type: 2}
+  - Texture2D: {fileID: 2800000, guid: e92feb063fa96124193d499656b2a16e, type: 3}
+    BlockData: {fileID: 11400000, guid: 1cfd1f7c81aab42a0819dfb3ce77db7e, type: 2}
+  - Texture2D: {fileID: 2800000, guid: e92feb063fa96124193d499656b2a16e, type: 3}
+    BlockData: {fileID: 11400000, guid: f676e498a75994d4a82c02eafc2e0025, type: 2}
+  - Texture2D: {fileID: 2800000, guid: e92feb063fa96124193d499656b2a16e, type: 3}
+    BlockData: {fileID: 11400000, guid: 80db1d13a649b4c1fbc54d2fe47e21a0, type: 2}
+  - Texture2D: {fileID: 2800000, guid: e92feb063fa96124193d499656b2a16e, type: 3}
+    BlockData: {fileID: 11400000, guid: e836b1c0e569140b08ba2b6330668f66, type: 2}
+  - Texture2D: {fileID: 2800000, guid: e92feb063fa96124193d499656b2a16e, type: 3}
+    BlockData: {fileID: 11400000, guid: b6a7fa339335541ab8ab2afebbbb2e97, type: 2}
+  - Texture2D: {fileID: 2800000, guid: e92feb063fa96124193d499656b2a16e, type: 3}
+    BlockData: {fileID: 11400000, guid: 8efe7f8f7e08a483db0ef153980747a1, type: 2}
+  - Texture2D: {fileID: 2800000, guid: e92feb063fa96124193d499656b2a16e, type: 3}
+    BlockData: {fileID: 11400000, guid: f1d9e3696cdb74669a0d03cb9d0027d2, type: 2}
+  - Texture2D: {fileID: 2800000, guid: e92feb063fa96124193d499656b2a16e, type: 3}
+    BlockData: {fileID: 11400000, guid: 8e969fd1ce3ed4556aa86b1e4762a058, type: 2}
+  - Texture2D: {fileID: 2800000, guid: e92feb063fa96124193d499656b2a16e, type: 3}
+    BlockData: {fileID: 11400000, guid: 663dd9963f0d342939a740c305b182b0, type: 2}
