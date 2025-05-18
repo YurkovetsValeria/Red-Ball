@@ -12,7 +12,6 @@ namespace GameDevLabirinth
         [SerializeField] private UnityEvent OnLifeLosted;
         [SerializeField] private UnityEventInt UiUpdate;
 
-        
         public int GetLifeCount()
         {
             return _life;

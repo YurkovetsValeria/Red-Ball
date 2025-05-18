@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace GameDevLabirinth
 {
@@ -7,6 +7,7 @@ namespace GameDevLabirinth
         public void Quit()
         {
             Application.Quit();
+            Debug.Log("Вы вышли из игры");
         }
     }
 }

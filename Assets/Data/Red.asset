@@ -16,5 +16,6 @@ MonoBehaviour:
   Sprites:
   - {fileID: -8480322663989752812, guid: d8fc44ecb3f398649bacdad35006cc89, type: 3}
   - {fileID: 2689354929541425477, guid: d8fc44ecb3f398649bacdad35006cc89, type: 3}
-  BaseColor: {r: 0.7607843, g: 0.21176471, b: 0.08627451, a: 1}
+  - {fileID: 6164509865321047114, guid: d8fc44ecb3f398649bacdad35006cc89, type: 3}
+  BaseColor: {r: 0.7607843, g: 0.1222211, b: 0.08627452, a: 1}
   Score: 100

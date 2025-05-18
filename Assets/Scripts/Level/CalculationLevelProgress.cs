@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace GameDevLabirinth
 {
@@ -12,36 +11,49 @@ namespace GameDevLabirinth
         private readonly LevelIndex _levelIndex = new LevelIndex();
         private EndGameData _endGameData;
 
-
         private void Calculate()
         {
-            _progress = _levelsData.GetLevelsProgress().Levels[_levelIndex.GetIndex()];
+            int currentLevelIndex = _levelIndex.GetIndex();
+            _progress = _levelsData.GetLevelsProgress().Levels[currentLevelIndex];
+
+            // Получаем текущий счет и определяем, побит ли рекорд
+            int currentScore = _scoreController.GetScore();
+            bool isNewRecord = currentScore > _progress.MaxScore;
+
+            // Если рекорд побит, обновляем его сразу
+            if (isNewRecord)
+            {
+                _progress.MaxScore = currentScore;
+                _levelsData.SaveLevelData(currentLevelIndex, _progress, false); // false - сохраняем только рекорд
+            }
 
             _endGameData = new EndGameData()
             {
-                LevelIndex = _levelIndex.GetIndex(),
+                LevelIndex = currentLevelIndex,
                 Life = _playerLife.GetLifeCount(),
-                Score = _scoreController.GetScore(),
-                Record = _progress.MaxScore
+                Score = currentScore,
+                Record = _progress.MaxScore,
+                IsWin = _playerLife.GetLifeCount() > 0,
+                IsNewRecord = isNewRecord
             };
 
-            if(_playerLife.GetLifeCount() > 0)
-            {
-                SaveLevelProgress();
-            }
+            // Сохраняем полный прогресс (включая звезды, если игрок выиграл)
+            SaveLevelProgress(_endGameData.IsWin);
         }
 
-        private void SaveLevelProgress()
+        private void SaveLevelProgress(bool isWin)
         {
-            if(_endGameData.Record < _endGameData.Score)
+            if (_endGameData.IsNewRecord)
             {
                 _progress.MaxScore = _endGameData.Score;
             }
-            if(_progress.StarsCount < _endGameData.Life)
+
+            if (isWin && _progress.StarsCount < _endGameData.Life)
             {
                 _progress.StarsCount = _endGameData.Life;
             }
-            _levelsData.SaveLevelData(_levelIndex.GetIndex(), _progress);
+
+            _levelsData.SaveLevelData(_levelIndex.GetIndex(), _progress, isWin);
         }
 
         public EndGameData GetEndGameData()
@@ -57,5 +69,7 @@ namespace GameDevLabirinth
         public int Life;
         public int Score;
         public int Record;
+        public bool IsWin;
+        public bool IsNewRecord;
     }
 }
